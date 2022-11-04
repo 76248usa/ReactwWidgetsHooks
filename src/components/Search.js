@@ -11,8 +11,7 @@ const Search = () => {
        //     console.log(response.data);
        // });
 
-
-       const search = async () => {
+      const search = async () => {
         const response = await axios.get('https://en.wikipedia.org/w/api.php', {
         params: {
             action: 'query',
@@ -28,24 +27,17 @@ const Search = () => {
     if(term && !results.length) {
         search();
     } else {
-
-        const timeoutId = setTimeout(() => {
+       const timeoutId = setTimeout(() => {
             if(term){
                 search();
             }
         }, 1000);
-    
         return () => {
             clearTimeout(timeoutId);
         };
-
-    }
-
-    
-                        
+    }                      
     }, [term]);
 
-    
 
     const renderedResults = results.map((result) => {
         return (<div className='item' key={result.pageid}>
